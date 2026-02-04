@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import FrontPage from '../pages/FrontPage.vue'
+import SendMessagePage from '../pages/SendMessagePage.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/front',
-      name: 'front',
+      path: '/',
+      name: 'home',
       component: FrontPage,
+    },
+    {
+      path: '/send',
+      name: 'send',
+      component: SendMessagePage,
     },
   ],
 })
