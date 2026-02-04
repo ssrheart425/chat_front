@@ -1,23 +1,35 @@
 <script setup>
 import { reactive } from 'vue'
+import img1 from '@/assets/images/front-1.jpg'
+import img2 from '@/assets/images/front-2.jpg'
+import img3 from '@/assets/images/front-3.jpg'
+import img4 from '@/assets/images/front-4.jpg'
+import img5 from '@/assets/images/front-5.jpg'
+import img6 from '@/assets/images/front-6.jpg'
+import img7 from '@/assets/images/front-7.jpg'
+import img8 from '@/assets/images/front-8.jpg'
+import img9 from '@/assets/images/front-9.jpg'
+import img10 from '@/assets/images/front-10.jpg'
+
 
 const imageSet1 = reactive([
-  { id: 1, src: '/images/front-1.jpg', alt: 'Image 1', label: 'Image 1', loaded: false },
-  { id: 2, src: '/images/front-2.jpg', alt: 'Image 2', label: 'Image 2', loaded: false },
-  { id: 3, src: '/images/front-3.jpg', alt: 'Image 3', label: 'Image 3', loaded: false },
+  { id: 1, src: img1, alt: 'Image 1', label: 'Image 1', loaded: false },
+  { id: 2, src: img2, alt: 'Image 2', label: 'Image 2', loaded: false },
+  { id: 3, src: img3, alt: 'Image 3', label: 'Image 3', loaded: false },
 ])
 
+
 const imageSet2 = reactive([
-  { id: 4, src: '/images/front-4.jpg', alt: 'Image 4', label: 'Image 4', loaded: false },
-  { id: 5, src: '/images/front-5.jpg', alt: 'Image 5', label: 'Image 5', loaded: false },
-  { id: 6, src: '/images/front-6.jpg', alt: 'Image 6', label: 'Image 6', loaded: false },
+  { id: 4, src: img4, alt: 'Image 4', label: 'Image 4', loaded: false },
+  { id: 5, src: img5, alt: 'Image 5', label: 'Image 5', loaded: false },
+  { id: 6, src: img6, alt: 'Image 6', label: 'Image 6', loaded: false },
 ])
 
 const imageSet3 = reactive([
-  { id: 7, src: '/images/front-7.jpg', alt: 'Image 7', label: 'Image 7', loaded: false },
-  { id: 8, src: '/images/front-8.jpg', alt: 'Image 8', label: 'Image 8', loaded: false },
-  { id: 9, src: '/images/front-9.jpg', alt: 'Image 9', label: 'Image 9', loaded: false },
-  { id: 10, src: '/images/front-10.jpg', alt: 'Image 10', label: 'Image 10', loaded: false },
+  { id: 7, src: img7, alt: 'Image 7', label: 'Image 7', loaded: false },
+  { id: 8, src: img8, alt: 'Image 8', label: 'Image 8', loaded: false },
+  { id: 9, src: img9, alt: 'Image 9', label: 'Image 9', loaded: false },
+  { id: 10, src: img10, alt: 'Image 10', label: 'Image 10', loaded: false },
 ])
 
 const markLoaded = (image, isLoaded) => {
