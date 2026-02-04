@@ -1,27 +1,25 @@
 <script setup>
+import { API } from '@/api/endpoints'
+import { request } from '@/api/http'
+
 const handleSendMessage = async () => {
-  // TODO: Fill in your request URL and method.
-  const requestUrl = ''
-  const requestMethod = ''
-
-  if (!requestUrl || !requestMethod) {
-    console.warn('Please set requestUrl and requestMethod before sending the request.')
-    return
-  }
-
   try {
-    const response = await fetch(requestUrl, {
-      method: requestMethod,
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await request({
+      url: API.links.random,
+      method: 'GET',
+      params: {
+        type: 1,
+        link_type: 2,
       },
-      // TODO: Put your request payload here.
-      body: JSON.stringify({}),
     })
 
-    if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`)
+    const link = response?.data?.data?.link
+    if (link) {
+      window.location.href = link
+      return
     }
+
+    console.warn('Random link response missing link field:', response?.data)
   } catch (error) {
     console.error('Send message request failed:', error)
   }
@@ -30,9 +28,16 @@ const handleSendMessage = async () => {
 
 <template>
   <div class="blank-page">
-    <button class="send-button" type="button" @click="handleSendMessage">
-      Send Message
-    </button>
+    <div class="center-stack">
+      <img
+        class="telegram-icon"
+        src="https://dehraflicks.com/wp-content/uploads/2025/07/Telegram-icon-bg-png-dehraflicks.png"
+        alt="Telegram"
+      />
+      <button class="send-button" type="button" @click="handleSendMessage">
+        Send Message
+      </button>
+    </div>
   </div>
 </template>
 
@@ -46,17 +51,33 @@ const handleSendMessage = async () => {
   background: #ffffff;
 }
 
+.center-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: clamp(280px, 70vw, 420px);
+}
+
+.telegram-icon {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
 .send-button {
   appearance: none;
   border: none;
   border-radius: 999px;
-  padding: 14px 32px;
-  font-size: 1rem;
+  padding: 22px 56px;
+  font-size: 1.35rem;
   font-weight: 600;
   cursor: pointer;
   background: #111111;
   color: #ffffff;
-  min-width: 180px;
+  width: 100%;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -72,7 +93,12 @@ const handleSendMessage = async () => {
 @media (max-width: 600px) {
   .send-button {
     width: 100%;
-    max-width: 320px;
+    max-width: none;
+  }
+
+  .telegram-icon {
+    width: 100%;
+    height: auto;
   }
 }
 </style>
