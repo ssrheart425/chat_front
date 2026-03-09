@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import FrontPage from '../pages/FrontPage.vue'
+import JapanPage from '../pages/JapanPage.vue'
 import SendMessagePage from '../pages/SendMessagePage.vue'
 
 const router = createRouter({
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/send',
       name: 'send',
       component: SendMessagePage,
+    },
+    {
+      path: '/japan',
+      name: 'japan',
+      component: JapanPage,
     },
   ],
 })
