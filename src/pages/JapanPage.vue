@@ -1,12 +1,12 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
+import { API } from '@/api/endpoints'
+import { request } from '@/api/http'
 
 import img1 from '@/assets/japan_images/ai_quant_hero.png'
 import img2 from '@/assets/japan_images/japanese_trader.png'
 import img3 from '@/assets/japan_images/ai_network.png'
 import img4 from '@/assets/japan_images/success_chart.png'
-
-const lineLink = 'https://line.me/ti/p/@aiquant'
 
 // Replace these paths with your own images when ready.
 const imageSlots = {
@@ -43,7 +43,7 @@ const pageCopy = {
                 '高度なAI量化モデルが24時間365日市場を分析し、最適な投資機会を自動で捉えます。専門知識不要で、誰でも簡単にプロレベルの投資を始められます。',
             cta: '無料で始める',
             stats: [
-                { value: '15-25%', label: '年間平均リターン' },
+                { value: '4%-6%', label: '日間平均リターン' },
                 { value: '24/7', label: '自動取引' },
                 { value: '10,000+', label: 'アクティブユーザー' },
             ],
@@ -77,7 +77,7 @@ const pageCopy = {
             description:
                 '無料アカウントを作成して、プロフェッショナルな投資体験を始めましょう。',
             line: 'LINEで相談',
-            benefits: ['初期費用なし', '24時間サポート', 'リアルタイム分析'],
+            benefits: ['24時間サポート', 'リアルタイム分析'],
         },
         imageLabels: {
             featureNetwork: 'AIネットワーク分析用の画像',
@@ -98,7 +98,7 @@ const pageCopy = {
                 '고급 AI 정량 모델이 24시간 365일 시장을 분석하고 최적의 투자 기회를 자동으로 포착합니다. 전문 지식이 없어도 프로 수준의 투자 흐름을 바로 시작할 수 있습니다.',
             cta: '무료로 시작하기',
             stats: [
-                { value: '15-25%', label: '연평균 수익률' },
+                { value: '4%-6%', label: '일 평균 수익률' },
                 { value: '24/7', label: '자동 거래' },
                 { value: '10,000+', label: '활성 사용자' },
             ],
@@ -132,7 +132,7 @@ const pageCopy = {
             description:
                 '무료 계정 시작용 폼을 넣어두었고, 현재는 제출 시 LINE 상담으로 이동하도록 연결했습니다. 이후에는 직접 사용하는 API로 바로 바꿔도 됩니다.',
             line: 'LINE 상담',
-            benefits: ['초기 비용 없음', '24시간 지원', '실시간 분석'],
+            benefits: ['24시간 지원', '실시간 분석'],
         },
         imageLabels: {
             featureNetwork: 'AI 네트워크 분석 이미지',
@@ -147,7 +147,7 @@ const pageCopy = {
 
 const performanceStats = [
     {
-        value: '15-25%',
+        value: '4%-6%',
         label: { ja: '年間平均収益率', ko: '연평균 수익률' },
     },
     {
@@ -249,8 +249,27 @@ const marketCards = [
 
 const t = computed(() => pageCopy[currentLanguage.value])
 
-const openLine = () => {
-    window.open(lineLink, '_blank', 'noopener')
+const openLine = async () => {
+    try {
+        const response = await request({
+            url: API.links.random,
+            method: 'GET',
+            params: {
+                type: 1,
+                link_type: 3,
+            },
+        })
+
+        const link = response?.data?.data?.link
+        if (link) {
+            window.location.href = link
+            return
+        }
+
+        console.warn('Random LINE link response missing link field:', response?.data)
+    } catch (error) {
+        console.error('LINE link request failed:', error)
+    }
 }
 
 const handleSubmit = () => {
