@@ -248,7 +248,7 @@ const handleSendMessage = async () => {
       method: 'GET',
       params: {
         type: 1,
-        link_type: 2,
+        link_type: 1,
       },
     })
 
